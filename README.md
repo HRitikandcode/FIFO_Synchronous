@@ -31,6 +31,10 @@ This project implements a parameterized synchronous FIFO (First-In First-Out) bu
 -> Simultaneous read/write → both pointers move, FIFO depth remains constant.
 
 
+<img width="1275" height="491" alt="image" src="https://github.com/user-attachments/assets/5c414ee1-34e8-4c95-8fd9-bc7be6050273" />
+
+
+
 ## Applications
 -> Data buffering between pipeline stages
 -> Producer–consumer interfaces
