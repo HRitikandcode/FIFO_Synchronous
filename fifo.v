@@ -42,6 +42,8 @@ module fifo #(
     // Read & Write pointers
     reg [$clog2(DEPTH):0] w_ptr, r_ptr;
 
+    localparam ADDR_WIDTH = $clog2(DEPTH);
+    
     // Status flags
     assign empty = (w_ptr == r_ptr);
     assign full  = ((w_ptr - r_ptr) == DEPTH);
@@ -52,7 +54,7 @@ module fifo #(
             w_ptr <= 0;
         end
         else if (wr_en && !full) begin
-            mem[w_ptr % DEPTH] <= data_in;
+            mem[w_ptr[ADDR_WIDTH-1:0]] <= data_in;
             w_ptr <= w_ptr + 1;
         end
     end
@@ -64,7 +66,7 @@ module fifo #(
             data_out <= 0;
         end
         else if (rd_en && !empty) begin
-            data_out <= mem[r_ptr % DEPTH];
+            data_out <= mem[r_ptr[ADDR_WIDTH-1:0]];
             r_ptr <= r_ptr + 1;
         end
     end
